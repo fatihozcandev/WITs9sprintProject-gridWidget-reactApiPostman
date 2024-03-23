@@ -1,15 +1,16 @@
 @font-face {
-  font-family: 'Titillium Web';
-  src: url('../fonts/TitilliumWeb-SemiBold.ttf');
+  font-family: "Titillium Web";
+  src: url("../fonts/TitilliumWeb-SemiBold.ttf");
 }
 
-html, body {
-  min-height:100vh;
+html,
+body {
+  min-height: 100vh;
 }
 
 body::after {
   content: "";
-  background: url('../images/Light-Gradient.jpeg');
+  background: url("../images/Light-Gradient.jpeg");
   opacity: 0.3;
   top: 0;
   left: 0;
@@ -19,12 +20,15 @@ body::after {
   z-index: -1;
 }
 
-body, input, button {
-  font-family: 'Titillium Web', sans-serif;
+body,
+input,
+button {
+  font-family: "Titillium Web", sans-serif;
   color: #484848;
 }
 
-#root, #wrapper {
+#root,
+#wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,7 +52,7 @@ nav a.active:nth-last-of-type(1) {
 }
 
 nav a.active:nth-last-of-type(2) {
-  color: #ff4b00;
+  color: #c3876e;
 }
 
 .info {
@@ -63,18 +67,19 @@ nav a.active:nth-last-of-type(2) {
   margin: 1rem 0 1rem 0;
 }
 
-#coordinates, #steps {
+#coordinates,
+#steps {
   font-size: 1.2rem;
 }
 
 #message {
   font-size: 1.2rem;
-  color: #00808c;
-  font-style: italic;
+  color: #8c0000;
+  font-style: bold;
 }
 
 .class-based #message {
-  color: #ff4b00;
+  color: #e6a924;
 }
 
 #grid {
@@ -93,12 +98,14 @@ nav a.active:nth-last-of-type(2) {
   color: white;
 }
 
-.class-based #grid .square, .functional #grid .square.active {
-  background-color: #00808c
+.class-based #grid .square,
+.functional #grid .square.active {
+  background-color: #00808c;
 }
 
-.class-based #grid .square.active, .functional #grid .square {
-  background-color: #ff4b00;
+.class-based #grid .square.active,
+.functional #grid .square {
+  background-color: #ffc400;
 }
 
 #keypad {
@@ -117,7 +124,7 @@ nav a.active:nth-last-of-type(2) {
 }
 
 #keypad button {
-  border: 1px solid #DDDDDD;
+  border: 1px solid #dddddd;
   border-radius: 28%;
   align-self: center;
   justify-self: center;
@@ -158,12 +165,12 @@ input {
   height: 1.9rem;
   border-radius: 0;
   margin: -1px;
-  border: 1px solid #DDDDDD;
+  border: 1px solid #dddddd;
   background-color: white;
   outline: none;
 }
 
-input[type=email] {
+input[type="email"] {
   width: 230px;
   margin-right: 1rem;
 }
