@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useInputHandler from "./hooks/useInputHandler";
+import axios from "axios";
 
 // önerilen başlangıç stateleri
 const initialEmail = "";
@@ -19,13 +20,14 @@ export default function AppFunctional(props) {
   const [yatayIdx, setYatayIdx] = useState(2);
   const [dikeyIdx, setDikeyIdx] = useState(2);
   const [errorMessage, setErrorMessage] = useState("");
-  const [yazi, yaziDegistir] = useInputHandler();
-  /* const postObject = {
+  const [yazi, yaziDegistir, sayac] = useInputHandler();
+  const [email, setEmail] = useState(initialEmail);
+  const postObject = {
     email: email,
-    x: yatayIdx
-    y: dikeyIdx
+    x: yatayIdx,
+    y: dikeyIdx,
     steps: counter,
-  }; */
+  };
 
   function clickHandler(event) {
     const { id } = event.target;
@@ -76,13 +78,27 @@ export default function AppFunctional(props) {
       setDikeyIdx(2);
       setIndex(initialIndex);
       setErrorMessage("");
+      setEmail(initialEmail);
     }
   }
 
-  function onChange(evt) {
+  function inputHandler2(event) {
+    setEmail(event.target.value);
     // inputun değerini güncellemek için bunu kullanabilirsiniz
   }
-  function onSubmit(evt) {
+  function onSubmit(event) {
+    event.preventDefault();
+    axios
+      .post("http://localhost:9000/api/result", postObject)
+      .then(function (response) {
+        console.log(response);
+        setErrorMessage(response.data.message);
+        setEmail(initialEmail);
+      })
+      .catch(function (error) {
+        console.log(error.response.data.message);
+        setErrorMessage(error.response.data.message);
+      });
     // payloadu POST etmek için bir submit handlera da ihtiyacınız var.
   }
 
@@ -105,10 +121,11 @@ export default function AppFunctional(props) {
         <h3 id="message">{errorMessage}</h3>
       </div>
       <div>
-        <card>
+        <div className="card">
           <h3>{yazi}</h3>
           <input onChange={yaziDegistir} value={yazi} type="text" />
-        </card>
+          <p> Metin Uzunluğu {sayac}</p>
+        </div>
       </div>
       <div id="keypad">
         <button type="button" onClick={clickHandler} id="left">
@@ -128,8 +145,14 @@ export default function AppFunctional(props) {
         </button>
       </div>
       <form>
-        <input id="email" type="email" placeholder="email girin"></input>
-        <input id="submit" type="submit"></input>
+        <input
+          id="email"
+          value={email}
+          type="email"
+          placeholder="email girin"
+          onChange={inputHandler2}
+        ></input>
+        <input id="submit" type="submit" onClick={onSubmit}></input>
       </form>
     </div>
   );
